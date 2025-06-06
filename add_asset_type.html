@@ -1,0 +1,14 @@
+{% extends 'inventory/base.html' %}
+{% block title %}Add New Asset Type{% endblock title %}
+
+{% block content %}
+<div class="card bg-light p-5">
+ <h2>Add New Asset Type</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add Asset Type</button>
+</form>
+
+</div>
+{% endblock content %}

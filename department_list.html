@@ -1,0 +1,20 @@
+{% extends 'inventory/base.html' %}
+{% block title %}Department List{% endblock title %}
+{% block content %}
+<div class="container mt-4">
+<h2>Department List</h2>
+<ul>
+  {% for department in departments %}
+    <li>{{ department.name }}
+        <a href="{% url 'delete_department' department.id %}" onclick="return confirm('Are you sure you want to delete this department?')">[Delete]</a>
+
+    </li>
+  {% endfor %}
+</ul>
+
+<a href="{% url 'add_department' %}">Add New Department</a>
+
+
+ 
+</div>
+{% endblock content %}

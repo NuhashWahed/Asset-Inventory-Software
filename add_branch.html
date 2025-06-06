@@ -1,0 +1,14 @@
+{% extends 'inventory/base.html' %}
+{% block title %}Branch Adding{% endblock title %}
+{% block content %}
+<div class="container mt-4">
+    <h1>Add Branch</h1>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Add</button>
+</form>
+
+ 
+</div>
+{% endblock content %}

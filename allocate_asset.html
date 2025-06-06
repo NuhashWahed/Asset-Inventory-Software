@@ -1,0 +1,29 @@
+{% extends 'inventory/base.html' %}
+{% block title %}Allocate Asset{% endblock %}
+{% block content %}
+<div class="container mt-4">
+  <h2>Allocate Asset: {{ asset.brand_model }} ({{ asset.serial_number }})</h2>
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <h4>Asset Information (readonly)</h4>
+    <ul>
+      <li><strong>Asset Type:</strong> {{ asset.asset_type.name }}</li>
+      <li><strong>Brand/Model:</strong> {{ asset.brand_model }}</li>
+      <li><strong>Serial Number:</strong> {{ asset.serial_number }}</li>
+      <li><strong>Supplier:</strong> {{ asset.supplier_name }}</li>
+      <li><strong>Contact Name:</strong> {{ asset.contact_name }}</li>
+      <li><strong>Contact Cell:</strong> {{ asset.contact_cell }}</li>
+      <li><strong>PO Date:</strong> {{ asset.po_date }}</li>
+      <li><strong>Purchase Date:</strong> {{ asset.purchase_date }}</li>
+      <li><strong>Warranty Start:</strong> {{ asset.warranty_start_date }}</li>
+      <li><strong>Warranty Expiry:</strong> {{ asset.warranty_expiry_date }}</li>
+      <li><strong>Comments:</strong> {{ asset.comments }}</li>
+    </ul>
+
+    <button type="submit" class="btn btn-primary">Allocate</button>
+  </form>
+</div>
+{% endblock %}

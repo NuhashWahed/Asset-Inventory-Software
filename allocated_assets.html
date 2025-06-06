@@ -1,0 +1,68 @@
+{% extends 'inventory/base.html' %}
+
+{% block title %}Allocated Assets{% endblock %}
+
+{% block content %}
+<h2>Allocated Assets</h2>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Employee</th>
+      <th>Asset Type</th>
+      <th>Brand/Model</th>
+      <th>Serial Number</th>
+      <th>Branch</th>
+      <th>Department</th>
+      <th>Supplier Name</th>
+      <th>Contact Name</th>
+      <th>Contact Number</th>
+      <th>Warranty Start</th>
+      <th>Warranty Expiry</th>
+      <th>PO</th>
+      <th>Purchase Date</th>
+      <th>Comments</th>
+      <th>Maintenance Date</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in allocations %}
+    <tr>
+      <td>{{ item.employee_name }} ({{ item.employee_id }})</td>
+      <td>{{ item.asset_type }}</td>
+      <td>{{ item.brand_model }}</td>
+      <td>{{ item.serial_number }}</td>
+      <td>{{ item.branch.name }}</td>
+      <td>{{ item.department.name }}</td>
+      <td>{{ item.supplier_name }}</td>
+      <td>{{ item.contact_name }}</td>
+      <td>{{ item.contact_cell }}</td>
+      <td>{{ item.warranty_start_date }}</td>
+      <td>{{ item.warranty_expiry_date }}</td>
+      <td>{{ item.po_date }}</td>
+      <td>{{ item.purchase_date }}</td>
+      <td>{{ item.comments }}</td>
+      <td 
+        {% if item.maintenance_date <= today %}
+          style="color:red;font-weight:bold;"
+        {% endif %}
+      >
+        {{ item.maintenance_date }}
+      </td>
+      <td>
+        {% if item.maintenance_date <= today %}
+          Due / Overdue
+        {% else %}
+          Normal
+        {% endif %}
+      </td>
+      <td>
+        <a href="{% url 'update_maintenance' item.id %}" class="btn btn-warning btn-sm">Update Maintenance</a>
+        <a href="{% url 'deallocate_asset' item.id %}" class="btn btn-danger btn-sm">Deallocate</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
